@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Barreto English — inglês prático para a vida real e uma experiência especial para desenvolvedores.">
+  <title>Barreto English — inglês para a vida real</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="transition-overlay" id="transitionOverlay" aria-hidden="true">
+  <div class="boot-window">
+    <div class="boot-head"><span>developer-mode.jar</span><span class="boot-status">EXECUTANDO</span></div>
+    <div class="boot-body" aria-live="polite">
+      <p><span class="prompt">C:\barreto-english&gt;</span> <span id="typedCommand"></span><span class="type-cursor">_</span></p>
+      <div id="bootLogs" class="boot-logs"></div>
+      <div class="syntax-challenge" id="syntaxChallenge" hidden>
+        <div class="syntax-message">
+          <span class="error-label">SUA PRIMEIRA AULA COMEÇA AQUI</span>
+          <h2>O erro também ensina.</h2>
+          <p>Na programação, quase nada funciona de primeira. No inglês também: você tenta, entende o erro, ajusta e evolui.</p>
+          <div class="error-lesson">
+            <div><code>error</code><span>significa</span><strong>erro</strong></div>
+            <div><code>expected</code><span>significa</span><strong>esperado</strong></div>
+          </div>
+          <p class="compiler-translation">A mensagem <code>';' expected</code> quer dizer que o computador <strong>esperava um ponto e vírgula</strong> no final da linha.</p>
+          <p class="answer-callout"><span>RESPOSTA</span> Digite <kbd>;</kbd> no espaço vermelho da linha 3.</p>
+        </div>
+        <div class="code-editor" aria-label="Código Java com erro de sintaxe">
+          <div class="code-gutter">1<br>2<br>3<br>4<br>5</div>
+          <pre><span class="code-keyword">public class</span> DeveloperMode {
+  <span class="code-keyword">public static void</span> main(String[] args) {
+    System.out.println(<span class="code-string">"Load developer mode"</span>)<input id="syntaxInput" class="syntax-input" aria-label="Digite ponto e vírgula" maxlength="1" placeholder=";" autocomplete="off" spellcheck="false">
+  }
+}</pre>
+        </div>
+        <div class="syntax-action">
+          <label for="syntaxInput">Agora copie a resposta para o código.</label>
+          <button id="compileButton" type="button">Compilar minha correção</button>
+        </div>
+        <p class="syntax-feedback" id="syntaxFeedback" aria-live="polite">Resposta: <strong>;</strong> (ponto e vírgula). Coloque esse símbolo no campo da linha 3.</p>
+      </div>
+      <div class="boot-progress"><i id="bootProgress"></i></div>
+    </div>
+  </div>
+  <div class="glitch-word" aria-hidden="true">DEV MODE</div>
+</div>
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="#inicio" aria-label="Barreto English, início"><span class="brand-mark"><span class="general-only">BE</span><span class="dev-only">&gt;_</span></span><span>barreto<span class="accent">english</span></span></a>
+    <nav class="navlinks" aria-label="Navegação principal">
+      <a href="#metodo" data-general="Método" data-dev="./method">Método</a>
+      <a href="#daily" data-general="Frase do dia" data-dev="daily.run()">Frase do dia</a>
+      <a href="#course" data-general="Destrava 30" data-dev="./destrava30">Destrava 30</a>
+      <a href="#about" data-general="Sobre" data-dev="about.dev">Sobre</a>
+    </nav>
+    <a class="navcta" href="#newsletter" data-general="Receber conteúdo" data-dev="subscribe()">Receber conteúdo</a>
+  </div>
+</header>
+
+<main id="siteContent">
+  <section class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span><span data-general="INGLÊS PARA A VIDA REAL" data-dev="ENGLISH.EXE // READY">INGLÊS PARA A VIDA REAL</span></div>
+        <h1 class="general-title">Inglês para<br><span>viver o mundo.</span></h1>
+        <h1 class="dev-title">English that<br><span>ships.</span></h1>
+        <p class="hero-text general-only">Aprenda a conversar, viajar e trabalhar com mais confiança. Conteúdo direto, situações reais e nada de aula enrolada.</p>
+        <p class="hero-text dev-only">Inglês para explicar bugs, ler documentação, sobreviver às dailies e conquistar oportunidades globais.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#daily"><span data-general="Começar com uma frase" data-dev="startLearning()">Começar com uma frase</span><b>→</b></a>
+          <a class="btn secondary" href="#metodo" data-general="Conhecer o método" data-dev="readDocs()">Conhecer o método</a>
+        </div>
+        <div class="trust-row">
+          <span><b>5 min</b> por dia</span><i></i><span><b>100%</b> prático</span><i></i><span><b>PT + EN</b> sem complicação</span>
+        </div>
+      </div>
+
+      <article class="experience-card">
+        <div class="card-orbit orbit-one"></div><div class="card-orbit orbit-two"></div>
+        <div class="experience-top"><span data-general="EXPRESSÃO DE HOJE" data-dev="phrase_of_the_day">EXPRESSÃO DE HOJE</span><small data-general="nível: essencial" data-dev="status: online">nível: essencial</small></div>
+        <div class="experience-body">
+          <span class="micro-label" data-general="DIGA ASSIM" data-dev="$ phrase --today">DIGA ASSIM</span>
+          <h2>I'll figure it out.</h2>
+          <p class="translation">Eu vou dar um jeito.</p>
+          <div class="example"><small data-general="EM UMA CONVERSA" data-dev="// example">EM UMA CONVERSA</small><p>I don't know yet, but I'll figure it out.</p></div>
+          <button id="speakHero" class="audio-btn"><span class="play">▶</span><span data-general="Ouvir pronúncia" data-dev="playAudio()">Ouvir pronúncia</span></button>
+        </div>
+      </article>
+    </div>
+    <div class="scroll-hint"><span></span><small data-general="DESCUBRA O MÉTODO" data-dev="SCROLL_TO_CONTINUE">DESCUBRA O MÉTODO</small></div>
+  </section>
+
+  <section class="mode-invitation" aria-labelledby="modeInviteTitle">
+    <div class="container mode-invite-inner">
+      <div class="mode-symbol"><span class="general-only">{ }</span><span class="dev-only">←</span></div>
+      <div>
+        <span class="mode-kicker general-only">TEM UMA CARREIRA EM TECNOLOGIA?</span>
+        <span class="mode-kicker dev-only">QUER VOLTAR À EXPERIÊNCIA PRINCIPAL?</span>
+        <h2 id="modeInviteTitle" class="general-only">Está procurando inglês para desenvolvedores?</h2>
+        <h2 class="dev-only">Sair do modo desenvolvedor?</h2>
+        <p class="general-only">Existe uma versão deste site feita especialmente para o seu universo.</p>
+        <p class="dev-only">Restaure a interface refinada de inglês para a vida real.</p>
+      </div>
+      <button id="modeToggle" class="mode-button" type="button" aria-pressed="false">
+        <span class="general-only">Ativar experiência dev</span><span class="dev-only">Voltar ao inglês geral</span><b>→</b>
+      </button>
+    </div>
+  </section>
+
+  <section class="section method-section" id="metodo">
+    <div class="container">
+      <div class="section-head">
+        <div><span class="kicker" data-general="UM MÉTODO QUE CABE NA VIDA" data-dev="01 / HOW_IT_WORKS">UM MÉTODO QUE CABE NA VIDA</span><h2 class="general-only">Pouco por dia.<br>Muito mais naturalidade.</h2><h2 class="dev-only">Pequenos commits.<br>Grandes resultados.</h2></div>
+        <p class="lead general-only">Em vez de acumular regras, você aprende frases que pode reconhecer, repetir e usar no mesmo dia.</p>
+        <p class="lead dev-only">Sem cursos gigantes no backlog. Aprenda, pratique e coloque inglês em produção todos os dias.</p>
+      </div>
+      <div class="steps-grid">
+        <article><span class="step-num">01</span><div class="step-icon">◉</div><h3 data-general="Veja no contexto" data-dev="input()">Veja no contexto</h3><p data-general="Uma frase útil dentro de uma situação que realmente acontece." data-dev="Receba uma expressão real de trabalho, código ou carreira.">Uma frase útil dentro de uma situação que realmente acontece.</p></article>
+        <article><span class="step-num">02</span><div class="step-icon">)))</div><h3 data-general="Escute e repita" data-dev="process()">Escute e repita</h3><p data-general="Pronúncia clara para treinar o ouvido e destravar a fala." data-dev="Entenda, escute e teste a nova expressão em contexto.">Pronúncia clara para treinar o ouvido e destravar a fala.</p></article>
+        <article><span class="step-num">03</span><div class="step-icon">✓</div><h3 data-general="Use de verdade" data-dev="deploy()">Use de verdade</h3><p data-general="Um pequeno desafio para transformar conteúdo em comunicação." data-dev="Leve o inglês da documentação para sua comunicação real.">Um pequeno desafio para transformar conteúdo em comunicação.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section daily-section" id="daily">
+    <div class="container">
+      <div class="title-row">
+        <div><span class="kicker" data-general="PRATIQUE AGORA" data-dev="02 / DAILY_RUN">PRATIQUE AGORA</span><h2 data-general="Uma frase útil por dia." data-dev="Today's English patch.">Uma frase útil por dia.</h2></div>
+        <span class="section-index" data-general="01 — 03" data-dev="daily.getToday()">01 — 03</span>
+      </div>
+      <div class="daily-grid">
+        <article class="panel main-panel">
+          <div class="panel-top"><span data-general="FRASE DO DIA" data-dev="phrase_of_the_day">FRASE DO DIA</span><small>● <span data-general="NOVO" data-dev="ONLINE">NOVO</span></small></div>
+          <label data-general="EM INGLÊS" data-dev="EN_US">EM INGLÊS</label><h3>I'll figure it out.</h3>
+          <label data-general="SIGNIFICADO" data-dev="PT_BR">SIGNIFICADO</label><p>Eu vou dar um jeito / vou descobrir como resolver.</p>
+          <hr><label data-general="EXEMPLO REAL" data-dev="EXAMPLE">EXEMPLO REAL</label><code>I don't know yet, but I'll figure it out.</code>
+          <button id="speakDaily" class="audio-btn block"><span class="play">▶</span><span data-general="Ouvir pronúncia" data-dev="pronounce()">Ouvir pronúncia</span></button>
+        </article>
+        <article class="panel">
+          <div class="panel-top"><span data-general="EVITE ISSO" data-dev="COMMON_BUG">EVITE ISSO</span></div>
+          <div class="wrong">✕ I will discover it.</div><div class="right">✓ I'll figure it out.</div>
+          <p class="soft" data-general="Traduzir palavra por palavra nem sempre soa natural." data-dev="Literal translation detected. Refactor to natural English.">Traduzir palavra por palavra nem sempre soa natural.</p>
+        </article>
+        <article class="panel challenge-mini">
+          <div class="panel-top"><span data-general="MINI DESAFIO" data-dev="QUICK_TEST">MINI DESAFIO</span></div>
+          <p class="question general-only">Como dizer “moro aqui há três anos”?</p>
+          <p class="question dev-only">Como dizer “estou trabalhando nesse bug desde ontem”?</p>
+          <button class="reveal" id="revealAnswer" type="button" data-general="Ver resposta" data-dev="runTest()">Ver resposta</button>
+          <div class="mini-answer" id="miniAnswer" hidden><span class="general-only">I've lived here for three years.</span><span class="dev-only">I've been working on this bug since yesterday.</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dev-content-section" id="devContent">
+    <div class="container">
+      <div class="title-row"><div><span class="kicker">03 / ENGLISH_FOR_DEVELOPERS</span><h2>Do código à comunicação.</h2></div><span class="section-index">developer.english()</span></div>
+      <p class="lead">Inglês para explicar decisões, entender documentação, participar de dailies e se sair bem em entrevistas técnicas.</p>
+      <div class="dev-grid">
+        <article class="dev-card"><span>01</span><div><b>WORK</b><h3>Daily meetings</h3><p>Explique o que fez, o que fará e onde está bloqueado.</p><code>“I'm currently working on...”</code></div></article>
+        <article class="dev-card"><span>02</span><div><b>GITHUB</b><h3>Commits & reviews</h3><p>Escreva mensagens naturais em commits, issues e pull requests.</p><code>“I'll look into this issue.”</code></div></article>
+        <article class="dev-card"><span>03</span><div><b>DOCS</b><h3>Read the docs</h3><p>Entenda vocabulário técnico sem traduzir cada palavra.</p><code>“This method is deprecated.”</code></div></article>
+        <article class="dev-card"><span>04</span><div><b>CAREER</b><h3>Tech interviews</h3><p>Apresente projetos, desafios e decisões com confiança.</p><code>“The main challenge was...”</code></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section course-section" id="course">
+    <div class="container course">
+      <div><span class="kicker" data-general="SEU PRÓXIMO PASSO" data-dev="04 / NEXT_LEVEL">SEU PRÓXIMO PASSO</span><span class="course-label" data-general="CURSO · DESTRAVA 30" data-dev="~/courses/destrava30">CURSO · DESTRAVA 30</span><h2 data-general="30 dias para começar a se comunicar." data-dev="Ship your English in 30 days.">30 dias para começar a se comunicar.</h2><p class="lead">Um caminho prático para sair do inglês travado e responder, entender e falar com mais naturalidade.</p><div class="tags"><span data-general="Conversação" data-dev="speaking">Conversação</span><span data-general="Compreensão" data-dev="listening">Compreensão</span><span data-general="Vida real" data-dev="real-life">Vida real</span><span data-general="Pronúncia" data-dev="pronunciation">Pronúncia</span></div></div>
+      <div class="course-side"><label data-general="EM PREPARAÇÃO" data-dev="STATUS">EM PREPARAÇÃO</label><strong data-general="Novidades em breve" data-dev="building...">Novidades em breve</strong><div class="progress"><i></i></div><a class="btn primary block" href="#newsletter" data-general="Entrar na lista de espera" data-dev="joinWaitlist()">Entrar na lista de espera</a><small data-general="Seja avisado quando as inscrições abrirem." data-dev="notification.enabled = true">Seja avisado quando as inscrições abrirem.</small></div>
+    </div>
+  </section>
+
+  <section class="section newsletter-section" id="newsletter">
+    <div class="container newsletter-grid">
+      <div><span class="kicker" data-general="CONTEÚDO GRATUITO" data-dev="05 / NEWSLETTER">CONTEÚDO GRATUITO</span><h2 class="general-only">Uma coisa útil por vez, direto no seu e-mail.</h2><h2 class="dev-only">Your weekly English update.</h2><p class="lead general-only">Frase, vocabulário, pronúncia e um pequeno desafio. Sem textão e sem spam.</p><p class="lead dev-only">Vocabulário, reuniões, carreira e comunicação técnica. Zero spam no log.</p><div class="email-preview"><span data-general="EXEMPLO DO QUE VOCÊ RECEBE" data-dev="incoming_message.eml">EXEMPLO DO QUE VOCÊ RECEBE</span><p>Frase de hoje: <b>“I'll look into it.”</b><br>Significado: Vou verificar / investigar isso.</p></div></div>
+      <form id="newsletterForm" class="signup"><div class="signup-head"><span data-general="ENTRE PARA A LISTA" data-dev="newsletter.subscribe()">ENTRE PARA A LISTA</span><i></i></div><label for="name" data-general="Seu nome" data-dev="name">Seu nome</label><input id="name" required placeholder="João" autocomplete="name"><label for="email" data-general="Seu melhor e-mail" data-dev="email">Seu melhor e-mail</label><input id="email" required type="email" placeholder="voce@email.com" autocomplete="email"><label data-general="Seu principal interesse" data-dev="interest">Seu principal interesse</label><div class="interests"><button type="button" class="interest active" aria-pressed="true">Inglês geral</button><button type="button" class="interest" aria-pressed="false">Tecnologia</button></div><button class="btn primary block" type="submit" data-general="Quero receber" data-dev="subscribe()">Quero receber</button><small id="newsletterMessage" aria-live="polite">Sem spam. Você pode sair quando quiser.</small></form>
+    </div>
+  </section>
+
+  <section class="section about-section" id="about">
+    <div class="container about-grid">
+      <figure class="portrait"><img src="assets/joao-paris.jpg" alt="João Barreto em frente à Torre Eiffel, em Paris"><figcaption><span>João Barreto</span><span data-general="Paris, França" data-dev="location: Paris_FR">Paris, França</span></figcaption></figure>
+      <div><span class="kicker" data-general="QUEM ESTÁ POR TRÁS" data-dev="06 / ABOUT_ME">QUEM ESTÁ POR TRÁS</span><h2 class="general-only">Oi, sou o Barreto.</h2><h2 class="dev-only">Teacher by day.<br>Developer by night.</h2><p class="lead">Sou professor, desenvolvedor e alguém que acredita que inglês precisa abrir portas — não parecer mais uma matéria complicada.</p><p class="lead general-only">Criei o Barreto English para ensinar o idioma de um jeito próximo da vida real: para conversar, viajar, trabalhar e explorar o mundo.</p><p class="lead dev-only">Criei o Barreto English para unir dois mundos que conheço bem: aprender um idioma e construir coisas com tecnologia.</p><blockquote data-general="Aprenda algo útil hoje. Use ainda hoje." data-dev="Learn. Build. Communicate.">Aprenda algo útil hoje. Use ainda hoje.</blockquote><div class="socials"><a href="#">TikTok ↗</a><a href="#">Instagram ↗</a><a href="#">YouTube ↗</a><a href="#">GitHub ↗</a></div></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer"><div class="container foot"><div class="brand"><span class="brand-mark"><span class="general-only">BE</span><span class="dev-only">&gt;_</span></span><span>barreto<span class="accent">english</span></span></div><div>© <span id="year"></span> · <span data-general="Inglês para viver o mundo." data-dev="status: building something useful.">Inglês para viver o mundo.</span></div></div></footer>
+<script src="script.js"></script>
+</body>
+</html>
