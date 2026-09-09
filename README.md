@@ -4,11 +4,14 @@ Mudanças:
 - experiência principal dark blue e refinada para inglês da vida real
 - modo especial para desenvolvedores ativado pelo visitante
 - transição com erro de sintaxe em Java, correção interativa, carregamento, tremor, blur e glitch
+- flashbang e tela de boas-vindas ao carregar o modo dev
 - identidade, tipografia, textos e conteúdo transformados no modo dev
 - seção English for Developers exclusiva do modo dev
 - foto do Barreto em Paris na seção Sobre
 - Daily Barreto
 - mini desafio adaptado a cada modo
+- Dev Lab com English Debugger, Stand-up Builder, PR Review, Commit Challenge, Bug Report, Docs e Interview Builder
+- terminal navegável, progresso persistente e deploy final do aprendizado
 - seleção automática da melhor voz natural em inglês disponível no navegador
 - newsletter com interesse em Inglês geral ou Programação
 - Destrava 30 preparado para futura integração com Kiwify

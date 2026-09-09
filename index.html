@@ -49,12 +49,21 @@
   <div class="glitch-word" aria-hidden="true">DEV MODE</div>
 </div>
 
+<div class="flashbang" id="flashbang" aria-hidden="true"></div>
+<div class="welcome-dev" id="welcomeDev" aria-hidden="true">
+  <div class="welcome-code">ACCESS GRANTED // EN_US</div>
+  <h2>WELCOME, DEVELOPER.</h2>
+  <p>Code speaks to machines.<br><strong>English connects you to the world.</strong></p>
+  <small>Loading your English workspace...</small>
+</div>
+
 <header class="topbar">
   <div class="container nav">
     <a class="brand" href="#inicio" aria-label="Barreto English, início"><span class="brand-mark"><span class="general-only">BE</span><span class="dev-only">&gt;_</span></span><span>barreto<span class="accent">english</span></span></a>
     <nav class="navlinks" aria-label="Navegação principal">
       <a href="#metodo" data-general="Método" data-dev="./method">Método</a>
       <a href="#daily" data-general="Frase do dia" data-dev="daily.run()">Frase do dia</a>
+      <a class="dev-only" href="#devLab">devLab()</a>
       <a href="#course" data-general="Destrava 30" data-dev="./destrava30">Destrava 30</a>
       <a href="#about" data-general="Sobre" data-dev="about.dev">Sobre</a>
     </nav>
@@ -157,15 +166,91 @@
     </div>
   </section>
 
-  <section class="section dev-content-section" id="devContent">
+  <section class="section dev-content-section" id="devLab">
     <div class="container">
-      <div class="title-row"><div><span class="kicker">03 / ENGLISH_FOR_DEVELOPERS</span><h2>Do código à comunicação.</h2></div><span class="section-index">developer.english()</span></div>
-      <p class="lead">Inglês para explicar decisões, entender documentação, participar de dailies e se sair bem em entrevistas técnicas.</p>
-      <div class="dev-grid">
-        <article class="dev-card"><span>01</span><div><b>WORK</b><h3>Daily meetings</h3><p>Explique o que fez, o que fará e onde está bloqueado.</p><code>“I'm currently working on...”</code></div></article>
-        <article class="dev-card"><span>02</span><div><b>GITHUB</b><h3>Commits & reviews</h3><p>Escreva mensagens naturais em commits, issues e pull requests.</p><code>“I'll look into this issue.”</code></div></article>
-        <article class="dev-card"><span>03</span><div><b>DOCS</b><h3>Read the docs</h3><p>Entenda vocabulário técnico sem traduzir cada palavra.</p><code>“This method is deprecated.”</code></div></article>
-        <article class="dev-card"><span>04</span><div><b>CAREER</b><h3>Tech interviews</h3><p>Apresente projetos, desafios e decisões com confiança.</p><code>“The main challenge was...”</code></div></article>
+      <div class="dev-lab-header">
+        <div><span class="kicker">03 / INTERACTIVE_DEV_LAB</span><h2>Debug your English.</h2><p>Sete missões baseadas na comunicação real de quem trabalha com tecnologia.</p></div>
+        <div class="build-status"><div><span>LEARNING BUILD</span><strong id="devProgressText">0%</strong></div><div class="lab-progress"><i id="devProgressBar"></i></div><small><b id="completedCount">0</b>/7 tests passed</small></div>
+      </div>
+
+      <div class="lab-shell">
+        <aside class="lab-sidebar" aria-label="Módulos do laboratório">
+          <div class="explorer-title">EXPLORER <span>ENGLISH-LAB</span></div>
+          <button class="lab-tab active" data-lab-target="debugger"><i data-task-status="debugger"></i><span>01</span> english-debugger.js</button>
+          <button class="lab-tab" data-lab-target="standup"><i data-task-status="standup"></i><span>02</span> standup-builder.ts</button>
+          <button class="lab-tab" data-lab-target="pullrequest"><i data-task-status="pullrequest"></i><span>03</span> pull-request.diff</button>
+          <button class="lab-tab" data-lab-target="commit"><i data-task-status="commit"></i><span>04</span> commit-message.git</button>
+          <button class="lab-tab" data-lab-target="bugreport"><i data-task-status="bugreport"></i><span>05</span> bug-report.md</button>
+          <button class="lab-tab" data-lab-target="docs"><i data-task-status="docs"></i><span>06</span> read-the-docs.md</button>
+          <button class="lab-tab" data-lab-target="interview"><i data-task-status="interview"></i><span>07</span> interview.json</button>
+        </aside>
+
+        <div class="lab-workspace">
+          <div class="workspace-top"><span id="activeFileName">english-debugger.js</span><div><i></i><i></i><i></i></div></div>
+
+          <article class="lab-panel active" data-lab-panel="debugger">
+            <div class="module-heading"><span class="module-tag">MISSION 01</span><h3>English Debugger</h3><p>Encontre o “bug” no inglês e escolha a frase que um falante usaria naturalmente.</p></div>
+            <div class="diff-block"><div class="diff-file">@@ communication.js:12 @@</div><button class="diff-line remove" data-debug-choice="wrong">− I have a doubt about this code.</button><button class="diff-line add" data-debug-choice="correct">+ I have a question about this code.</button></div>
+            <div class="module-feedback" id="debugFeedback">Clique na frase que você usaria para fazer uma pergunta.</div>
+            <div class="explanation" id="debugExplanation" hidden><strong>Por quê?</strong><p><code>doubt</code> é uma incerteza. Quando você deseja perguntar algo, a forma natural é <code>I have a question</code>.</p><button class="mini-audio" data-speak="I have a question about this code.">▶ ouvir frase correta</button></div>
+          </article>
+
+          <article class="lab-panel" data-lab-panel="standup">
+            <div class="module-heading"><span class="module-tag">MISSION 02</span><h3>Daily Stand-up Builder</h3><p>Preencha em inglês. Nós organizamos sua atualização como ela seria dita em uma daily.</p></div>
+            <div class="form-grid"><label>Yesterday<input id="standupYesterday" placeholder="finished the login page"></label><label>Today<input id="standupToday" placeholder="work on authentication"></label><label>Blocker<input id="standupBlocker" placeholder="an API issue (ou deixe vazio)"></label></div>
+            <button class="lab-action" id="buildStandup">buildStandup()</button>
+            <div class="generated-output" id="standupOutput" hidden><span>YOUR UPDATE</span><p></p><div><button data-copy-target="standupOutput">copy()</button><button id="speakStandup">▶ play()</button></div></div>
+          </article>
+
+          <article class="lab-panel" data-lab-panel="pullrequest">
+            <div class="module-heading"><span class="module-tag">MISSION 03</span><h3>Pull Request Review</h3><p>Em equipes internacionais, a maneira de dizer importa tanto quanto a correção técnica.</p></div>
+            <div class="review-context"><span>src/auth/login.js</span><code>if (user) redirect('/dashboard')</code></div>
+            <p class="module-question">Qual comentário soa mais profissional e colaborativo?</p>
+            <div class="choice-stack"><button data-pr-choice="wrong"><b>A</b> This code is wrong. Change it.</button><button data-pr-choice="correct"><b>B</b> Could we simplify this part?</button></div>
+            <div class="module-feedback" id="prFeedback">Escolha uma opção.</div>
+          </article>
+
+          <article class="lab-panel" data-lab-panel="commit">
+            <div class="module-heading"><span class="module-tag">MISSION 04</span><h3>Commit Message Challenge</h3><p>Como escrever “Corrige o problema de login” em um commit claro e natural?</p></div>
+            <div class="terminal-question"><span>$ git commit -m</span><strong>?</strong></div>
+            <div class="choice-stack"><button data-commit-choice="wrong"><b>A</b> “Fixed the login problem”</button><button data-commit-choice="correct"><b>B</b> “Fix login issue”</button><button data-commit-choice="wrong"><b>C</b> “Correcting problem of login”</button></div>
+            <div class="module-feedback" id="commitFeedback">Dica: mensagens de commit normalmente começam com um verbo no imperativo.</div>
+          </article>
+
+          <article class="lab-panel" data-lab-panel="bugreport">
+            <div class="module-heading"><span class="module-tag">MISSION 05</span><h3>Bug Report Generator</h3><p>Descreva o problema de forma simples. O template organiza seu relatório profissional.</p></div>
+            <div class="form-grid"><label>Expected behavior<textarea id="expectedBehavior" placeholder="The user should be redirected to the dashboard."></textarea></label><label>Actual behavior<textarea id="actualBehavior" placeholder="The page remains on the login screen."></textarea></label><label>When does it happen?<textarea id="bugCondition" placeholder="It happens after clicking the login button."></textarea></label></div>
+            <button class="lab-action" id="generateBugReport">generateReport()</button>
+            <div class="generated-output report-output" id="bugReportOutput" hidden><span>BUG-REPORT.MD</span><pre></pre><button data-copy-target="bugReportOutput">copy()</button></div>
+          </article>
+
+          <article class="lab-panel" data-lab-panel="docs">
+            <div class="module-heading"><span class="module-tag">MISSION 06</span><h3>Read the Docs</h3><p>Leia o trecho e responda sem traduzir palavra por palavra.</p></div>
+            <div class="docs-snippet"><span>AUTHENTICATE(USER, OPTIONS)</span><p>The <code>token</code> parameter is <strong>required</strong>. The <code>redirectUrl</code> option is <strong>optional</strong>. This method is <strong>deprecated</strong> and will be removed in the next release.</p></div>
+            <p class="module-question">O que significa <code>deprecated</code> nesse contexto?</p>
+            <div class="choice-stack"><button data-docs-choice="wrong"><b>A</b> É obrigatório</button><button data-docs-choice="correct"><b>B</b> Foi descontinuado e não é mais recomendado</button><button data-docs-choice="wrong"><b>C</b> Está temporariamente bloqueado</button></div>
+            <div class="module-feedback" id="docsFeedback">Vocabulário: <code>required</code> = obrigatório · <code>optional</code> = opcional.</div>
+          </article>
+
+          <article class="lab-panel" data-lab-panel="interview">
+            <div class="module-heading"><span class="module-tag">MISSION 07</span><h3>Technical Interview Builder</h3><p>Monte uma resposta usando a estrutura: contexto, desafio, ação e resultado.</p></div>
+            <div class="interview-prompt">“Tell me about a challenging project.”</div>
+            <div class="form-grid interview-grid"><label>Context<input id="interviewContext" placeholder="In my last project..."></label><label>Challenge<input id="interviewChallenge" placeholder="The main challenge was..."></label><label>Action<input id="interviewAction" placeholder="I decided to..."></label><label>Result<input id="interviewResult" placeholder="As a result..."></label></div>
+            <button class="lab-action" id="buildInterview">buildAnswer()</button>
+            <div class="generated-output" id="interviewOutput" hidden><span>YOUR INTERVIEW ANSWER</span><p></p><div><button data-copy-target="interviewOutput">copy()</button><button id="speakInterview">▶ play()</button></div></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="lab-terminal">
+        <div class="terminal-title"><span>TERMINAL</span><small>Digite <b>help</b> para ver os comandos</small></div>
+        <div class="terminal-output" id="terminalOutput"><p><span>barreto@english:~/dev-lab$</span> Workspace ready. Type <b>help</b>.</p></div>
+        <form id="terminalForm"><label for="terminalInput">barreto@english:~/dev-lab$</label><input id="terminalInput" autocomplete="off" spellcheck="false" placeholder="help"><button type="submit">run</button></form>
+      </div>
+
+      <div class="deploy-card">
+        <div><span>FINAL BUILD</span><h3 id="deployTitle">Complete all missions to deploy your English.</h3><p id="deployDescription">Cada missão concluída libera uma parte da build.</p></div>
+        <button id="deployEnglish" type="button" disabled>deployEnglish()</button>
       </div>
     </div>
   </section>
