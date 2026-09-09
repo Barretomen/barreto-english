@@ -25,6 +25,8 @@ OUTPUT.mkdir(parents=True, exist_ok=True)
 
 pdfmetrics.registerFont(TTFont("Barreto", "C:/Windows/Fonts/arial.ttf"))
 pdfmetrics.registerFont(TTFont("Barreto-Bold", "C:/Windows/Fonts/arialbd.ttf"))
+pdfmetrics.registerFont(TTFont("Barreto-Hand", "C:/Windows/Fonts/segoepr.ttf"))
+pdfmetrics.registerFont(TTFont("Barreto-Hand-Bold", "C:/Windows/Fonts/segoeprb.ttf"))
 
 PAGE_W, PAGE_H = A4
 
@@ -32,6 +34,10 @@ GENERAL = {
     "accent": colors.HexColor("#267BFF"),
     "dark": colors.HexColor("#071426"),
     "soft": colors.HexColor("#EAF2FF"),
+    "paper": colors.HexColor("#F3F7FC"),
+    "paper_alt": colors.HexColor("#E7EFF9"),
+    "rule": colors.HexColor("#C7D7E8"),
+    "pattern": colors.HexColor("#DCE7F3"),
     "label": "GENERAL ENGLISH",
 }
 
@@ -39,6 +45,10 @@ DEV = {
     "accent": colors.HexColor("#16A765"),
     "dark": colors.HexColor("#06150D"),
     "soft": colors.HexColor("#E8F8EF"),
+    "paper": colors.HexColor("#F2F7F3"),
+    "paper_alt": colors.HexColor("#E5F0E8"),
+    "rule": colors.HexColor("#C9DECF"),
+    "pattern": colors.HexColor("#DCEADF"),
     "label": "ENGLISH FOR DEVELOPERS",
 }
 
@@ -326,21 +336,43 @@ def make_styles(theme):
         "exercise": ParagraphStyle("Exercise", parent=base["BodyText"], fontName="Barreto", fontSize=10, leading=15, textColor=colors.HexColor("#253142"), spaceAfter=9),
         "answer": ParagraphStyle("Answer", parent=base["BodyText"], fontName="Barreto", fontSize=9.6, leading=14, textColor=colors.HexColor("#253142"), spaceAfter=7),
         "center": ParagraphStyle("Center", parent=base["BodyText"], fontName="Barreto", fontSize=9, leading=13, alignment=TA_CENTER, textColor=colors.HexColor("#6A7685")),
+        "hand": ParagraphStyle("Hand", parent=base["BodyText"], fontName="Barreto-Hand", fontSize=10.5, leading=15, textColor=theme["dark"]),
+        "hand_accent": ParagraphStyle("HandAccent", parent=base["BodyText"], fontName="Barreto-Hand-Bold", fontSize=11, leading=15, textColor=theme["accent"]),
     }
 
 
 def page_decor(canvas, doc, theme, title):
     canvas.saveState()
+    canvas.setFillColor(theme["paper"])
+    canvas.rect(0, 0, PAGE_W, PAGE_H, fill=1, stroke=0)
+    canvas.setFillColor(theme["accent"])
+    canvas.rect(0, 0, 3.5 * mm, PAGE_H, fill=1, stroke=0)
+
+    # Caderno discreto: pontos e marcas de margem deixam cada página menos rígida.
+    canvas.setFillColor(theme["pattern"])
+    for x in range(16, 205, 13):
+        for y in range(24, 286, 13):
+            canvas.circle(x * mm, y * mm, 0.28 * mm, fill=1, stroke=0)
+    canvas.setStrokeColor(theme["rule"])
+    canvas.setLineWidth(0.45)
+    canvas.line(13 * mm, 18 * mm, 13 * mm, PAGE_H - 20 * mm)
+
     if doc.page > 1:
         canvas.setFillColor(theme["dark"])
-        canvas.rect(0, PAGE_H - 18 * mm, PAGE_W, 18 * mm, fill=1, stroke=0)
+        canvas.rect(3.5 * mm, PAGE_H - 18 * mm, PAGE_W - 3.5 * mm, 18 * mm, fill=1, stroke=0)
         canvas.setFont("Barreto-Bold", 8)
         canvas.setFillColor(theme["accent"])
         canvas.drawString(18 * mm, PAGE_H - 11.5 * mm, "BARRETO ENGLISH")
         canvas.setFont("Barreto", 7.5)
         canvas.setFillColor(colors.HexColor("#C1CBD6"))
         canvas.drawRightString(PAGE_W - 18 * mm, PAGE_H - 11.5 * mm, title)
-    canvas.setStrokeColor(colors.HexColor("#DCE3EB"))
+    else:
+        canvas.setStrokeColor(theme["rule"])
+        canvas.setLineWidth(1.2)
+        canvas.circle(PAGE_W - 20 * mm, PAGE_H - 22 * mm, 14 * mm, fill=0, stroke=1)
+        canvas.circle(PAGE_W - 20 * mm, PAGE_H - 22 * mm, 9 * mm, fill=0, stroke=1)
+
+    canvas.setStrokeColor(theme["rule"])
     canvas.line(18 * mm, 14 * mm, PAGE_W - 18 * mm, 14 * mm)
     canvas.setFont("Barreto", 7.5)
     canvas.setFillColor(colors.HexColor("#7C8794"))
@@ -352,8 +384,9 @@ def page_decor(canvas, doc, theme, title):
 def concept_card(title, text, styles, theme):
     table = Table([[Paragraph(title, styles["h2"]), Paragraph(text, styles["body"])]], colWidths=[42 * mm, 120 * mm])
     table.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, -1), theme["soft"]),
-        ("BOX", (0, 0), (-1, -1), 0.7, colors.HexColor("#C9D7E6")),
+        ("BACKGROUND", (0, 0), (-1, -1), theme["paper_alt"]),
+        ("BOX", (0, 0), (-1, -1), 0.7, theme["rule"]),
+        ("LINEBEFORE", (0, 0), (0, -1), 3, theme["accent"]),
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
         ("LEFTPADDING", (0, 0), (-1, -1), 10),
         ("RIGHTPADDING", (0, 0), (-1, -1), 10),
@@ -361,6 +394,24 @@ def concept_card(title, text, styles, theme):
         ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
     ]))
     return table
+
+
+def handwritten_note(text, styles, theme, label="nota do Barreto"):
+    note = Table([
+        [Paragraph(label.upper(), styles["small"])],
+        [Paragraph(text, styles["hand_accent"])],
+    ], colWidths=[162 * mm])
+    note.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, -1), theme["soft"]),
+        ("BOX", (0, 0), (-1, -1), 0.8, theme["rule"]),
+        ("LEFTPADDING", (0, 0), (-1, -1), 13),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 13),
+        ("TOPPADDING", (0, 0), (-1, 0), 8),
+        ("BOTTOMPADDING", (0, 0), (-1, 0), 2),
+        ("TOPPADDING", (0, 1), (-1, 1), 2),
+        ("BOTTOMPADDING", (0, 1), (-1, 1), 10),
+    ]))
+    return note
 
 
 def build_pdf(material):
@@ -380,10 +431,11 @@ def build_pdf(material):
         [Paragraph(f"MATERIAL GRATUITO / {theme['label']} / {material['number']}", styles["cover_label"])],
         [Paragraph(material["title"], styles["cover_title"])],
         [Paragraph(material["subtitle"], styles["cover_sub"])],
-        [Spacer(1, 35 * mm)],
+        [Spacer(1, 29 * mm)],
         [Paragraph(material["level"], ParagraphStyle("Level", fontName="Barreto-Bold", fontSize=12, textColor=theme["accent"]))],
         [Paragraph("EXPLICAÇÃO + EXEMPLOS + EXERCÍCIOS + GABARITO", ParagraphStyle("Meta", fontName="Barreto", fontSize=8, leading=12, textColor=colors.HexColor("#9DABBA"), spaceBefore=8))],
-    ], colWidths=[doc.width], rowHeights=[None, None, None, None, None, None])
+        [Paragraph("Preparei esta aula para você praticar no seu ritmo. - Barreto", ParagraphStyle("CoverNote", fontName="Barreto-Hand", fontSize=10, leading=14, textColor=colors.HexColor("#DDE7F0"), spaceBefore=14))],
+    ], colWidths=[doc.width], rowHeights=[None, None, None, None, None, None, None])
     cover.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, -1), theme["dark"]),
         ("LEFTPADDING", (0, 0), (-1, -1), 18 * mm),
@@ -391,12 +443,12 @@ def build_pdf(material):
         ("TOPPADDING", (0, 0), (-1, 0), 16 * mm),
         ("BOTTOMPADDING", (0, -1), (-1, -1), 18 * mm),
     ]))
-    story.extend([Spacer(1, 22 * mm), cover, Spacer(1, 14 * mm), Paragraph("Aprenda algo útil hoje. Use ainda hoje.", styles["center"]), PageBreak()])
+    story.extend([Spacer(1, 18 * mm), cover, Spacer(1, 9 * mm), Paragraph("Aprenda algo útil hoje. Use ainda hoje.", styles["hand"]), PageBreak()])
 
     story.extend([Paragraph("O que você vai aprender", styles["h1"])])
     for goal in material["goals"]:
         story.append(Paragraph(f"<font color='{theme['accent'].hexval()}'>●</font>&nbsp;&nbsp;{goal}", styles["body"]))
-    story.append(Spacer(1, 6 * mm))
+    story.extend([Spacer(1, 4 * mm), handwritten_note("Não tente decorar tudo. Leia os exemplos em voz alta e marque o que você realmente usaria.", styles, theme), Spacer(1, 6 * mm)])
     for title, text in material["concepts"]:
         story.extend([concept_card(title, text, styles, theme), Spacer(1, 4 * mm)])
     story.append(PageBreak())
@@ -409,24 +461,26 @@ def build_pdf(material):
     phrases.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), theme["dark"]),
         ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-        ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#D6DFE8")),
+        ("GRID", (0, 0), (-1, -1), 0.5, theme["rule"]),
+        ("BACKGROUND", (0, 1), (-1, -1), colors.white),
+        ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.HexColor("#FBFCFE"), theme["paper_alt"]]),
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
         ("LEFTPADDING", (0, 0), (-1, -1), 9),
         ("RIGHTPADDING", (0, 0), (-1, -1), 9),
         ("TOPPADDING", (0, 0), (-1, -1), 8),
         ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
     ]))
-    story.extend([phrases, Spacer(1, 8 * mm), Paragraph("Pratique", styles["h1"])])
+    story.extend([phrases, Spacer(1, 7 * mm), Paragraph("Pratique", styles["h1"]), Paragraph("Pegue uma caneta. Tentar antes de conferir é o que faz o conteúdo ficar.", styles["hand_accent"]), Spacer(1, 3 * mm)])
     for idx, exercise in enumerate(material["exercises"], 1):
         story.append(Paragraph(f"<b>{idx:02d}</b>&nbsp;&nbsp;{exercise}", styles["exercise"]))
     story.append(PageBreak())
 
-    story.extend([Paragraph("Gabarito comentado", styles["h1"]), Paragraph("Confira somente depois de tentar. Errar também faz parte do aprendizado.", styles["body"]), Spacer(1, 3 * mm)])
+    story.extend([Paragraph("Gabarito comentado", styles["h1"]), handwritten_note("Se errou alguma, ótimo: agora você descobriu exatamente o que precisa revisar.", styles, theme, "um recado rápido"), Spacer(1, 5 * mm)])
     for answer in material["answers"]:
         story.append(Paragraph(answer, styles["answer"]))
     challenge_table = Table([[Paragraph("DESAFIO FINAL", styles["h2"]), Paragraph(material["challenge"], styles["body"])]], colWidths=[42 * mm, 120 * mm])
     challenge_table.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, -1), theme["soft"]),
+        ("BACKGROUND", (0, 0), (-1, -1), theme["paper_alt"]),
         ("BOX", (0, 0), (-1, -1), 1, theme["accent"]),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
         ("LEFTPADDING", (0, 0), (-1, -1), 10),
