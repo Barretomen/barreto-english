@@ -208,12 +208,13 @@ body.dev-mode:before{background:linear-gradient(rgba(114,255,173,.025) 1px,trans
 .dev-mode .mode-invitation{background:#09100c}
 .dev-mode .mode-button{color:#b9c7be}
 .dev-mode .steps-grid article,.dev-mode .panel,.dev-mode .course,.dev-mode .signup,.dev-mode .email-preview{border-radius:5px}
-.dev-mode .method-section,.dev-mode .daily-section,.dev-mode .course-section,.dev-mode .materials-section,.dev-mode .newsletter-section,.dev-mode .about-section{background:#050806}
-.dev-mode .panel,.dev-mode .course,.dev-mode .material-card{border-color:#1b3022;background:linear-gradient(145deg,#0b140e,#060a08)}
-.dev-mode .newsletter-section{background:radial-gradient(circle at 18% 20%,rgba(114,255,173,.06),transparent 28%),#050806}
-.dev-mode .signup,.dev-mode .email-preview{border-color:#1b3022;background:#080d0a}
-.dev-mode .signup input,.dev-mode .interest{border-color:#1b3022;background:#050806}
-.dev-mode .portrait{border-color:#1b3022;background:#080d0a}
+body.dev-mode .method-section,body.dev-mode .daily-section,body.dev-mode .course-section,body.dev-mode .materials-section,body.dev-mode .newsletter-section,body.dev-mode .about-section{background:radial-gradient(circle at 18% 18%,rgba(114,255,173,.055),transparent 34%),#050806!important}
+body.dev-mode .daily-grid .panel,body.dev-mode .course,body.dev-mode .material-card{border-color:#1d3b29!important;background:linear-gradient(145deg,#0b1b12,#061009)!important;box-shadow:inset 0 1px 0 rgba(114,255,173,.025)}
+body.dev-mode .daily-grid .main-panel{border-color:#2d6843!important;background:linear-gradient(145deg,#0d2116,#07110b)!important}
+body.dev-mode .newsletter-section{background:radial-gradient(circle at 18% 20%,rgba(114,255,173,.075),transparent 32%),#050806!important}
+body.dev-mode .signup,body.dev-mode .email-preview{border-color:#1d3b29!important;background:#09130d!important}
+body.dev-mode .signup input,body.dev-mode .interest{border-color:#1b3022!important;background:#050a07!important}
+body.dev-mode .portrait{border-color:#1d3b29!important;background:#08110b!important}
 .dev-mode .materials-heading h2,.dev-mode .material-card h3,.dev-mode .material-card a{color:#e5f2e9}
 .dev-mode .track-title p,.dev-mode .material-card p{color:#7f9185}
 .dev-mode .free-badge{border-radius:4px}
