@@ -447,6 +447,106 @@ deployButton?.addEventListener("click", () => {
 
 updateLabProgress();
 
+// General English placement test
+const placementForm = document.getElementById("placementForm");
+const quizSteps = [...document.querySelectorAll(".quiz-step")];
+const quizCounter = document.getElementById("quizCounter");
+const quizDifficulty = document.getElementById("quizDifficulty");
+const quizProgress = document.getElementById("quizProgress");
+const quizWarning = document.getElementById("quizWarning");
+const quizBack = document.getElementById("quizBack");
+const quizNext = document.getElementById("quizNext");
+const quizResult = document.getElementById("quizResult");
+const quizRestart = document.getElementById("quizRestart");
+let currentQuizStep = 0;
+
+const levelProfiles = {
+  A1: { title: "Iniciante", description: "Você reconhece estruturas essenciais. O melhor próximo passo é construir uma base segura para se apresentar e formar frases simples.", material: "output/pdf/general-01-primeiras-conversas-a1.pdf" },
+  A2: { title: "Básico", description: "Você já entende situações comuns. Agora vale ampliar frases sobre rotina, perguntas e experiências do dia a dia.", material: "output/pdf/general-02-rotina-presente-simples-a1-a2.pdf" },
+  B1: { title: "Intermediário", description: "Você consegue lidar com muitos contextos conhecidos. Pratique para falar com mais continuidade, precisão e naturalidade.", material: "output/pdf/general-03-situacoes-reais-a2.pdf" },
+  B2: { title: "Intermediário superior", description: "Você tem boa autonomia e já compreende estruturas mais complexas. Foque em nuance, fluidez e vocabulário ativo.", material: "output/pdf/general-03-situacoes-reais-a2.pdf" },
+  C1: { title: "Avançado", description: "Você demonstra ótimo controle do idioma. Seu próximo salto vem de precisão, repertório e comunicação em contextos exigentes.", material: "output/pdf/general-03-situacoes-reais-a2.pdf" },
+  C2: { title: "Proficiente", description: "Você acertou todos os pontos deste teste curto. Procure uma avaliação completa para confirmar domínio e trabalhar nuances finas.", material: "output/pdf/general-03-situacoes-reais-a2.pdf" }
+};
+
+function levelForScore(score) {
+  if (score <= 2) return "A1";
+  if (score <= 4) return "A2";
+  if (score <= 6) return "B1";
+  if (score === 7) return "B2";
+  if (score <= 9) return "C1";
+  return "C2";
+}
+
+function renderQuizStep() {
+  quizSteps.forEach((step, index) => step.classList.toggle("active", index === currentQuizStep));
+  quizCounter.textContent = `PERGUNTA ${currentQuizStep + 1} DE ${quizSteps.length}`;
+  quizDifficulty.textContent = currentQuizStep < 2 ? "NÍVEL ESSENCIAL" : currentQuizStep < 4 ? "NÍVEL BÁSICO" : currentQuizStep < 6 ? "NÍVEL INTERMEDIÁRIO" : currentQuizStep < 8 ? "INTERMEDIÁRIO SUPERIOR" : "DESAFIO AVANÇADO";
+  quizProgress.style.width = `${((currentQuizStep + 1) / quizSteps.length) * 100}%`;
+  quizBack.disabled = currentQuizStep === 0;
+  quizNext.textContent = currentQuizStep === quizSteps.length - 1 ? "Ver meu nível →" : "Próxima →";
+  quizWarning.textContent = "";
+}
+
+function finishPlacementTest() {
+  const data = new FormData(placementForm);
+  const score = quizSteps.reduce((total, _, index) => total + Number(data.get(`q${index}`) || 0), 0);
+  const level = levelForScore(score);
+  const profile = levelProfiles[level];
+  placementForm.hidden = true;
+  document.querySelector("#placementQuiz .quiz-top").hidden = true;
+  document.querySelector("#placementQuiz .quiz-progress").hidden = true;
+  quizResult.hidden = false;
+  document.getElementById("resultLevel").textContent = level;
+  document.getElementById("resultTitle").textContent = profile.title;
+  document.getElementById("resultDescription").textContent = profile.description;
+  document.getElementById("resultScore").textContent = `${score} de ${quizSteps.length} respostas corretas · estimativa CEFR`;
+  document.getElementById("resultMaterial").href = profile.material;
+  document.querySelectorAll("[data-cefr]").forEach((item) => item.classList.toggle("highlight", item.dataset.cefr === level));
+}
+
+quizNext?.addEventListener("click", () => {
+  const selected = placementForm.querySelector(`input[name="q${currentQuizStep}"]:checked`);
+  if (!selected) {
+    quizWarning.textContent = "Escolha uma resposta para continuar.";
+    return;
+  }
+  if (currentQuizStep === quizSteps.length - 1) finishPlacementTest();
+  else {
+    currentQuizStep += 1;
+    renderQuizStep();
+  }
+});
+
+quizBack?.addEventListener("click", () => {
+  if (currentQuizStep > 0) {
+    currentQuizStep -= 1;
+    renderQuizStep();
+  }
+});
+
+quizRestart?.addEventListener("click", () => {
+  placementForm.reset();
+  placementForm.hidden = false;
+  document.querySelector("#placementQuiz .quiz-top").hidden = false;
+  document.querySelector("#placementQuiz .quiz-progress").hidden = false;
+  quizResult.hidden = true;
+  currentQuizStep = 0;
+  document.querySelectorAll("[data-cefr]").forEach((item) => item.classList.remove("highlight"));
+  renderQuizStep();
+});
+
+if (placementForm) renderQuizStep();
+
+const kiwifyProductLink = document.getElementById("kiwifyProductLink");
+kiwifyProductLink?.addEventListener("click", (event) => {
+  const productUrl = kiwifyProductLink.dataset.kiwifyUrl?.trim();
+  if (productUrl) {
+    event.preventDefault();
+    window.location.href = productUrl;
+  }
+});
+
 const interests = document.querySelectorAll(".interest");
 interests.forEach((button) => button.addEventListener("click", () => {
   interests.forEach((item) => {

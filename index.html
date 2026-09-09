@@ -63,7 +63,9 @@
     <nav class="navlinks" aria-label="Navegação principal">
       <a href="#metodo" data-general="Método" data-dev="./method">Método</a>
       <a href="#daily" data-general="Frase do dia" data-dev="daily.run()">Frase do dia</a>
+      <a class="general-only" href="#nivel">Teste de nível</a>
       <a class="dev-only" href="#devLab">devLab()</a>
+      <a href="#materiais" data-general="Materiais grátis" data-dev="free.resources">Materiais grátis</a>
       <a href="#course" data-general="Destrava 30" data-dev="./destrava30">Destrava 30</a>
       <a href="#about" data-general="Sobre" data-dev="about.dev">Sobre</a>
     </nav>
@@ -166,6 +168,46 @@
     </div>
   </section>
 
+  <section class="section assessment-section general-only" id="nivel">
+    <div class="container">
+      <div class="assessment-heading">
+        <div><span class="kicker">DESCUBRA POR ONDE COMEÇAR</span><h2>Qual é o seu nível de inglês?</h2><p class="lead">Responda a 10 perguntas que avançam do essencial ao avançado. No final, você recebe uma estimativa do seu nível e entende o que ela significa.</p></div>
+        <div class="assessment-note"><strong>Leva cerca de 3 minutos</strong><span>Sem cadastro · resultado imediato</span></div>
+      </div>
+      <div class="assessment-layout">
+        <div class="quiz-card" id="placementQuiz">
+          <div class="quiz-top"><span id="quizCounter">PERGUNTA 1 DE 10</span><strong id="quizDifficulty">COMEÇANDO PELO ESSENCIAL</strong></div>
+          <div class="quiz-progress" aria-hidden="true"><i id="quizProgress"></i></div>
+          <form id="placementForm">
+            <fieldset class="quiz-step active" data-quiz-step="0"><legend>I ___ from Brazil.</legend><label><input type="radio" name="q0" value="0"> is</label><label><input type="radio" name="q0" value="1"> am</label><label><input type="radio" name="q0" value="0"> are</label></fieldset>
+            <fieldset class="quiz-step" data-quiz-step="1"><legend>She ___ a teacher.</legend><label><input type="radio" name="q1" value="1"> is</label><label><input type="radio" name="q1" value="0"> am</label><label><input type="radio" name="q1" value="0"> are</label></fieldset>
+            <fieldset class="quiz-step" data-quiz-step="2"><legend>He ___ coffee every morning.</legend><label><input type="radio" name="q2" value="1"> drinks</label><label><input type="radio" name="q2" value="0"> drink</label><label><input type="radio" name="q2" value="0"> drinking</label></fieldset>
+            <fieldset class="quiz-step" data-quiz-step="3"><legend>Yesterday, we ___ to the market.</legend><label><input type="radio" name="q3" value="0"> go</label><label><input type="radio" name="q3" value="1"> went</label><label><input type="radio" name="q3" value="0"> gone</label></fieldset>
+            <fieldset class="quiz-step" data-quiz-step="4"><legend>I've lived here ___ 2022.</legend><label><input type="radio" name="q4" value="1"> since</label><label><input type="radio" name="q4" value="0"> for</label><label><input type="radio" name="q4" value="0"> from</label></fieldset>
+            <fieldset class="quiz-step" data-quiz-step="5"><legend>If it rains, we ___ at home.</legend><label><input type="radio" name="q5" value="1"> will stay</label><label><input type="radio" name="q5" value="0"> stayed</label><label><input type="radio" name="q5" value="0"> would stay</label></fieldset>
+            <fieldset class="quiz-step" data-quiz-step="6"><legend>By the time I arrived, they ___.</legend><label><input type="radio" name="q6" value="0"> have left</label><label><input type="radio" name="q6" value="1"> had left</label><label><input type="radio" name="q6" value="0"> leave</label></fieldset>
+            <fieldset class="quiz-step" data-quiz-step="7"><legend>I wish I ___ more time to practise.</legend><label><input type="radio" name="q7" value="1"> had</label><label><input type="radio" name="q7" value="0"> have</label><label><input type="radio" name="q7" value="0"> will have</label></fieldset>
+            <fieldset class="quiz-step" data-quiz-step="8"><legend>Despite ___ tired, she finished the report.</legend><label><input type="radio" name="q8" value="0"> to be</label><label><input type="radio" name="q8" value="1"> being</label><label><input type="radio" name="q8" value="0"> be</label></fieldset>
+            <fieldset class="quiz-step" data-quiz-step="9"><legend>Hardly ___ the meeting started when the alarm rang.</legend><label><input type="radio" name="q9" value="1"> had</label><label><input type="radio" name="q9" value="0"> did</label><label><input type="radio" name="q9" value="0"> has</label></fieldset>
+            <p class="quiz-warning" id="quizWarning" aria-live="polite"></p>
+            <div class="quiz-actions"><button type="button" class="quiz-back" id="quizBack" disabled>← Anterior</button><button type="button" class="btn primary" id="quizNext">Próxima →</button></div>
+          </form>
+          <div class="quiz-result" id="quizResult" hidden aria-live="polite"><span>SEU RESULTADO ESTIMADO</span><div class="result-level" id="resultLevel">A1</div><h3 id="resultTitle">Iniciante</h3><p id="resultDescription"></p><div class="result-score" id="resultScore"></div><a class="btn primary" href="#materiais" id="resultMaterial" download>Baixar material recomendado</a><button type="button" class="quiz-restart" id="quizRestart">Refazer o teste</button></div>
+        </div>
+        <aside class="cefr-guide" aria-label="Explicação dos níveis de inglês">
+          <div class="cefr-intro"><span>O QUE SIGNIFICAM AS LETRAS?</span><p>O CEFR é uma escala internacional que descreve o que você consegue fazer em inglês — não é uma nota escolar.</p></div>
+          <article data-cefr="A1"><b>A1</b><div><strong>Iniciante</strong><p>Entende apresentações, cumprimentos e frases muito simples.</p></div></article>
+          <article data-cefr="A2"><b>A2</b><div><strong>Básico</strong><p>Conversa sobre rotina, compras, família e necessidades imediatas.</p></div></article>
+          <article data-cefr="B1"><b>B1</b><div><strong>Intermediário</strong><p>Lida com viagens, trabalho e conversas sobre assuntos conhecidos.</p></div></article>
+          <article data-cefr="B2"><b>B2</b><div><strong>Intermediário superior</strong><p>Conversa com boa autonomia e entende ideias mais complexas.</p></div></article>
+          <article data-cefr="C1"><b>C1</b><div><strong>Avançado</strong><p>Usa inglês com fluidez em contextos profissionais e acadêmicos.</p></div></article>
+          <article data-cefr="C2"><b>C2</b><div><strong>Proficiente</strong><p>Compreende praticamente tudo e se expressa com muita precisão.</p></div></article>
+          <small>Este mini teste é uma orientação inicial, não uma certificação oficial.</small>
+        </aside>
+      </div>
+    </div>
+  </section>
+
   <section class="section dev-content-section" id="devLab">
     <div class="container">
       <div class="dev-lab-header">
@@ -256,9 +298,31 @@
   </section>
 
   <section class="section course-section" id="course">
-    <div class="container course">
-      <div><span class="kicker" data-general="SEU PRÓXIMO PASSO" data-dev="04 / NEXT_LEVEL">SEU PRÓXIMO PASSO</span><span class="course-label" data-general="CURSO · DESTRAVA 30" data-dev="~/courses/destrava30">CURSO · DESTRAVA 30</span><h2 data-general="30 dias para começar a se comunicar." data-dev="Ship your English in 30 days.">30 dias para começar a se comunicar.</h2><p class="lead">Um caminho prático para sair do inglês travado e responder, entender e falar com mais naturalidade.</p><div class="tags"><span data-general="Conversação" data-dev="speaking">Conversação</span><span data-general="Compreensão" data-dev="listening">Compreensão</span><span data-general="Vida real" data-dev="real-life">Vida real</span><span data-general="Pronúncia" data-dev="pronunciation">Pronúncia</span></div></div>
-      <div class="course-side"><label data-general="EM PREPARAÇÃO" data-dev="STATUS">EM PREPARAÇÃO</label><strong data-general="Novidades em breve" data-dev="building...">Novidades em breve</strong><div class="progress"><i></i></div><a class="btn primary block" href="#newsletter" data-general="Entrar na lista de espera" data-dev="joinWaitlist()">Entrar na lista de espera</a><small data-general="Seja avisado quando as inscrições abrirem." data-dev="notification.enabled = true">Seja avisado quando as inscrições abrirem.</small></div>
+      <div class="container course">
+      <div><span class="kicker" data-general="SEU PRÓXIMO PASSO" data-dev="05 / NEXT_LEVEL">SEU PRÓXIMO PASSO</span><span class="course-label" data-general="CURSO COMPLETO · EM BREVE NA KIWIFY" data-dev="~/courses/destrava30">CURSO COMPLETO · EM BREVE NA KIWIFY</span><h2 data-general="Da base à conversa, com um caminho completo." data-dev="Ship your English in 30 days.">Da base à conversa, com um caminho completo.</h2><p class="lead" data-general="Uma área separada para quem deseja sair dos materiais gratuitos e seguir uma trilha estruturada, com aulas, prática e acompanhamento." data-dev="A practical path to communicate in meetings, code reviews and global opportunities.">Uma área separada para quem deseja sair dos materiais gratuitos e seguir uma trilha estruturada, com aulas, prática e acompanhamento.</p><div class="tags"><span data-general="Trilha organizada" data-dev="speaking">Trilha organizada</span><span data-general="Aulas práticas" data-dev="listening">Aulas práticas</span><span data-general="Exercícios" data-dev="real-life">Exercícios</span><span data-general="Do seu nível" data-dev="pronunciation">Do seu nível</span></div></div>
+      <div class="course-side"><label data-general="PRODUTO KIWIFY" data-dev="STATUS">PRODUTO KIWIFY</label><strong data-general="Link de matrícula em preparação" data-dev="building...">Link de matrícula em preparação</strong><div class="progress"><i></i></div><!-- Ao cadastrar o produto, cole a URL da Kiwify no atributo data-kiwify-url abaixo. --><a class="btn primary block" id="kiwifyProductLink" href="#newsletter" data-kiwify-url="" data-general="Quero ser avisado" data-dev="joinWaitlist()">Quero ser avisado</a><small id="kiwifyStatus" data-general="A página já está pronta para receber o seu checkout." data-dev="checkout.endpoint = pending">A página já está pronta para receber o seu checkout.</small></div>
+      </div>
+  </section>
+
+  <section class="section materials-section" id="materiais">
+    <div class="container">
+      <div class="materials-heading"><div><span class="kicker" data-general="BIBLIOTECA GRATUITA" data-dev="04 / FREE_RESOURCES">BIBLIOTECA GRATUITA</span><h2 data-general="Baixe, pratique e confira o gabarito." data-dev="Download. Practise. Level up.">Baixe, pratique e confira o gabarito.</h2><p class="lead">Seis cadernos originais em PDF, com explicação direta, atividades e correção. Comece pela trilha que combina com você.</p></div><span class="free-badge">100% GRÁTIS · PDF</span></div>
+      <div class="material-track">
+        <div class="track-title"><span>GENERAL ENGLISH</span><p>Para conversas, rotina e situações reais.</p></div>
+        <div class="materials-grid">
+          <article class="material-card"><span class="material-level">A1 · LIÇÃO 01</span><h3>Primeiras conversas</h3><p>Cumprimentos, apresentações e o verbo <em>to be</em>.</p><a href="output/pdf/general-01-primeiras-conversas-a1.pdf" download>Baixar PDF <b>↓</b></a></article>
+          <article class="material-card"><span class="material-level">A1–A2 · LIÇÃO 02</span><h3>Rotina e presente simples</h3><p>Hábitos, horários, perguntas e frequência.</p><a href="output/pdf/general-02-rotina-presente-simples-a1-a2.pdf" download>Baixar PDF <b>↓</b></a></article>
+          <article class="material-card"><span class="material-level">A2 · LIÇÃO 03</span><h3>Situações reais</h3><p>Restaurante, viagem, compras e pedidos educados.</p><a href="output/pdf/general-03-situacoes-reais-a2.pdf" download>Baixar PDF <b>↓</b></a></article>
+        </div>
+      </div>
+      <div class="material-track dev-track">
+        <div class="track-title"><span>ENGLISH FOR DEVELOPERS</span><p>Para código, equipes e comunicação técnica.</p></div>
+        <div class="materials-grid">
+          <article class="material-card"><span class="material-level">A1–A2 · LIÇÃO 01</span><h3>Vocabulário essencial</h3><p>Bug, feature, deploy e frases para começar.</p><a href="output/pdf/dev-01-vocabulario-essencial-a1-a2.pdf" download>Baixar PDF <b>↓</b></a></article>
+          <article class="material-card"><span class="material-level">A2 · LIÇÃO 02</span><h3>Dailies e mensagens</h3><p>Atualizações claras, bloqueios e pedidos de ajuda.</p><a href="output/pdf/dev-02-dailies-e-mensagens-a2.pdf" download>Baixar PDF <b>↓</b></a></article>
+          <article class="material-card"><span class="material-level">A2–B1 · LIÇÃO 03</span><h3>Commits, PRs e documentação</h3><p>Escrita técnica curta, profissional e natural.</p><a href="output/pdf/dev-03-commits-prs-documentacao-a2-b1.pdf" download>Baixar PDF <b>↓</b></a></article>
+        </div>
+      </div>
     </div>
   </section>
 
