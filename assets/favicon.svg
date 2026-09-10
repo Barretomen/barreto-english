@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Barreto English">
+  <rect x="10" y="10" width="48" height="48" rx="6" fill="#f2c84b"/>
+  <path fill="#1457d9" d="M6 6h48v48H6z"/>
+  <path fill="#ef4438" d="M41 6h13v13z"/>
+  <path fill="#fff" d="M17 17h19v7H24v6h10v7H24v7h13v7H17z"/>
+</svg>

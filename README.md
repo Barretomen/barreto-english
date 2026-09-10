@@ -1,5 +1,14 @@
 # Barreto English v2 — Dual Experience
 
+## Identidade visual 2026
+
+O site usa uma direção de “passaporte de comunicação”: azul internacional,
+vermelho de sinalização, amarelo de orientação e superfícies claras. O modo
+desenvolvedor mantém a mesma identidade em uma oficina azul-escura, com ciano
+e âmbar no lugar do visual hacker genérico. A camada visual está em
+`redesign.css`; `styles.css` continua responsável pela base e pelos estados das
+interações.
+
 Mudanças:
 - experiência principal dark blue e refinada para inglês da vida real
 - modo especial para desenvolvedores ativado pelo visitante
